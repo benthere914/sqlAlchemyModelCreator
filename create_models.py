@@ -1,5 +1,5 @@
 import re
-
+import os
 class Model():
     def __init__(self):
         self.models = []
@@ -129,7 +129,11 @@ class Model():
                 f.writelines(self.lines)
                 f.close()
 
-
+    def delete_files(self):
+        for model in self.models:
+            if ('table_name' in model and os.path.exists(f'app/models/{model["table_name"]}')):
+                os.remove(f'app/models/{model["table_name"]}')
 model = Model()
 model.set_models()
+model.delete_files()
 model.create_files()
