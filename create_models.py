@@ -64,7 +64,7 @@ class Model():
         else:
             self.lines.append(f'\nclass {model["table_name"]}(db.Model):\n')
 
-        self.lines.append(f'    __table_name__ = "{model["table_name"]}"\n')
+        self.lines.append(f'    __tablename__ = "{model["table_name"]}"\n')
 
         for key in model["keys"]:
             self.lines.append(f'    {key["name"]} = db.Column({key["type"]}, primary_key={key["primary"]}, nullable={not key["not_null"]})\n')
