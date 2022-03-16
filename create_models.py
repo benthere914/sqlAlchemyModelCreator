@@ -1,6 +1,4 @@
-from operator import mod
 import re
-
 
 class Model():
     def __init__(self):
@@ -123,24 +121,15 @@ class Model():
             self.lines.append("    def is_valid(self):\n")
             self.lines.append("        return self.is_active\n\n")
 
-
-
-            # self.lines.append(
-
-
-
     def create_files(self):
         for model in self.models:
             if ('table_name' in model):
                 f = open(f'app/models/{model["table_name"]}.py', 'a')
                 self.create_lines(model)
                 f.writelines(self.lines)
-                # f = open('')
                 f.close()
-
 
 
 model = Model()
 model.set_models()
 model.create_files()
-# print(model.models)
