@@ -1,7 +1,9 @@
 import re
 import os
 import inflect
+
 p = inflect.engine()
+
 class Model():
     def __init__(self):
         self.models = []
@@ -137,6 +139,7 @@ class Model():
         for model in self.models:
             if ('table_name' in model and os.path.exists(f'app/models/{model["table_name"]}')):
                 os.remove(f'app/models/{model["table_name"]}')
+
 model = Model()
 model.set_models()
 model.delete_files()
