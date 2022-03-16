@@ -1,5 +1,7 @@
 import re
 import os
+import inflect
+p = inflect.engine()
 class Model():
     def __init__(self):
         self.models = []
@@ -62,7 +64,7 @@ class Model():
             self.lines.append('from flask_login import UserMixin\n\n')
             self.lines.append('class User(db.Model, UserMixin):\n')
         else:
-            self.lines.append(f'\nclass {model["table_name"]}(db.Model):\n')
+            self.lines.append(f'\nclass {model["table_name"][0].upper()}{p.singular_noun(model["table_name"][1:])}(db.Model):\n')
 
         self.lines.append(f'    __tablename__ = "{model["table_name"]}"\n')
 
@@ -128,6 +130,8 @@ class Model():
                 self.create_lines(model)
                 f.writelines(self.lines)
                 f.close()
+                f = open('app/models/__init__.py', 'a')
+                f.writelines(f'from .{model["table_name"]} import {model["table_name"][0].upper()}{p.singular_noun(model["table_name"][1:])}\n')
 
     def delete_files(self):
         for model in self.models:
