@@ -12,7 +12,8 @@ class Model():
             "db.Integer": ['int', 'INT', 'SERIAL', 'serial', 'integer' 'INTEGER'],
             "db.String(255)": ['VARCHAR', 'varchar', 'str'],
             "db.Boolean": ['boolean', "BOOLEAN", 'bool', 'BOOL'],
-            "JSON": ['json', 'JSON', 'map', 'MAP']
+            "JSON": ['json', 'JSON', 'map', 'MAP'],
+            "db.DateTime": ["DATETIME", "TIMESTAMP", "datetime", "timestamp"]
         }
         self.lines = []
         self.include_jwt = True
